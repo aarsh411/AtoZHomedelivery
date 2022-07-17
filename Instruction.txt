@@ -1,0 +1,5 @@
+Error:
+	1) <1060,'Dupicate column'> after migrate:::::::::::::: pythone manage.py migrate [app_name] --fake
+							     After that apply migrate....
+	2) Jo database ma kai aevu lage k locha 6 to aena mate pela phpmyadmin ma thi database drop karvanu ane pa6i
+	   migrations folder ma _init_.py cy ni badhi file delete kari nakhvi ane pa6u makemigration ane migrate karvanu..

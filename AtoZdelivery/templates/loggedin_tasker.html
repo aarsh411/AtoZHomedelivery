@@ -1,0 +1,41 @@
+<!-- <h1>Welcome {{name}}
+<a href ="/list_tasker_work/">Your list</a>
+</a>
+</h1> -->
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0093c4;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+</style>
+</head>
+<ul>
+  <li><a href="/profile_tasker/">profile</a></li>
+  <li><a href="/myList/">My list</a></li>
+  <li style="float:right"><a href="/logout/">logout</a></li>
+</ul>
+</html>

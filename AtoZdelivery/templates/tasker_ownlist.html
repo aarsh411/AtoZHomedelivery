@@ -1,0 +1,71 @@
+
+<html>
+<head>
+	<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0093c4;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+</style>
+</head>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<ul>
+  <li><a href="/profile/">profile</a></li>
+  <li><a href="/myorders/">My Orders</a></li>
+  <li style="float:right"><a href="/logout/">logout</a></li>
+</ul>
+<div class="container">
+    
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        
+                        <th>Status</th>
+                        <th>Review</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                        {% for item in list %}	
+                        <tr>
+						<div>
+							<td>{{item.t_id}}</td>
+							<td>{% ifequal 0 item.order_status %}PENDING{% else %}DELIVERD{% endifequal %}</td>
+							<td>{{item.order_review}}</td>
+							<form action="\details_for_tasker\" method="POST">{% csrf_token %}
+							  <input type="hidden" name="taskerid" value="{{item.t_id}}">
+						  	<input type="hidden" name = "orderid" value={{item.order_id}}>
+  					   	<td><button>Details</button></td> 
+  						</form>
+  	                 	<br><br><br>
+	                   </div></tr>
+	                       {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+</html>

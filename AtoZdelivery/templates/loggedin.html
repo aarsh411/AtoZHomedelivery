@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0093c4;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+</style>
+  <title>AtoZHomeServices</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->  
+  <link rel="icon" type="image/png" href='{% static "images/icons/favicon.ico" %}'>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}'>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href='{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}'>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href='{% static "fonts/Linearicons-Free-v1.0.0/icon-font.min.css" %}'>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href='{% static "vendor/animate/animate.css" %}'>
+<!--===============================================================================================-->  
+  <link rel="stylesheet" type="text/css" href='{% static "vendor/css-hamburgers/hamburgers.min.css" %}'>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href='{% static "vendor/animsition/css/animsition.min.css" %}'>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href='{% static "vendor/select2/select2.min.css" %}'>
+<!--===============================================================================================-->  
+  <link rel="stylesheet" type="text/css" href='{% static "vendor/daterangepicker/daterangepicker.css" %}'>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href='{% static "css/util.css" %}'>
+  <link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
+<!--===============================================================================================-->
+</head>
+<body>
+  
+  <div class="limiter">
+  <ul>
+  <li><a href="/profile/">profile</a></li>
+  <li><a href="/myorders/">My Orders</a></li>
+  <li><a href="/loggedin/">Search Tasker</a></li>
+  <li style="float:right"><a href="/logout/">logout</a></li>
+</ul>
+
+    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+      <div class="wrap-login100 p-t-30 p-b-50">
+       <span class="login100-form-title p-b-41" style="color:pink">
+        </span>
+        <span class="login100-form-title p-b-41">
+          <h21> Search</h1>
+        </span>
+        <form class="login100-form validate-form p-b-33 p-t-5 " action="/list/" method="get">
+          <div class="wrap-input100 validate-input" data-validate="Enter type">
+            <select class="input100" type="text" name="type" placeholder="search location" default="seasd">
+            <option hidden>Select type of service</option>
+            {% for catagory in catagories %}
+            <option value="{{catagory.t_type}}">{{catagory.t_type}}</option>
+            {% endfor %}
+            </select>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate="Enter type">
+            <select class="input100" type="text" name="location">
+              <option value="" hidden>Select location</option>
+              {% for location in locations %}
+                <option value="{{location.t_location}}">{{location.t_location}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div style="margin-left: 160px;width: 77%;">
+            <button style="background-color: green; width: 25%" class="container-login100-form-btn m-t-32">
+              Search
+            </button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+
+  <div id="dropDownSelect1"></div>
+  
+<!--===============================================================================================-->
+  <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+  <script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+  <script src="vendor/bootstrap/js/popper.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+  <script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+  <script src="vendor/daterangepicker/moment.min.js"></script>
+  <script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+  <script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

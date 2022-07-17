@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<ul>
+  <li><a href="/profile/">profile</a></li>
+  <li><a href="/myorders/">My Orders</a></li>
+  <li><a href="/loggedin/">Search Tasker</a></li>
+  <li style="float:right"><a href="/logout/">logout</a></li>
+</ul>
+<head>
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0093c4;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'css/task_table_css.css' %}">
+</head>
+<body>
+
+<h1 align="center">Tasker list</h1>
+<h4 align="center">Type:{{ type }}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Location:{{ location }}</h4>
+
+<h2 align="center">FILTER:<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"></h2>
+
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width:40%;">Name</th>
+    <th style="width:20%">Rupee/Hour</th>
+    <th style="width:20%;">Rate/5</th>
+    <th style="width:20%;">View Profile</th>
+  </tr>
+  {% for item in values %}
+  <form action="/view_tasker/" method="GET">{% csrf_token %}
+  <tr>
+     <td>{{item.t_name}}</td>
+     <td>{{item.t_rupee}}</td>
+     <td>{{item.t_rate}}</td>
+     <td><button>View</button></td>
+  </tr>
+  <input type="hidden" name="taskername" value={{item.t_name}}>
+</form>
+
+  {% empty %}
+    <tr>Sorry, no Tasker found in this list.</tr>
+{% endfor %}
+</table>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText ;
+      
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+</body>
+</html>

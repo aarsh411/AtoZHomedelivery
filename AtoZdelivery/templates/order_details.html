@@ -1,0 +1,111 @@
+<!-- <html>
+{{myorders.order_status}}
+	{% ifequal 0 myorders.order_status %}
+		<h1></h1>
+	{% endifequal %}
+</html> -->
+<!--<html>
+<h2>Name : {{ taskerpro.t_name}}</h2>
+phone_no :{{taskerpro.t_phone_no}}<br>
+Email    :{{taskerpro.t_email}}
+<br><br>
+<button>Do Service</button>-->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<style>
+ .abc{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0093c4;
+}
+
+.abcd {
+    float: left;
+}
+
+.abcd a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+</style>
+	<title>orders</title>
+	<meta charset="UTF-8">
+	<link href="img/favicon.ico" rel="shortcut icon"/>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+	<link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'/>
+	<link rel="stylesheet" href='{% static "css/style.css" %}'/>
+</head>
+<body>
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+	<div class="abc">
+  	<div class="abcd"><a href="/profile/">profile</a></div>
+  	<div class="abcd"><a href="/myorders/">My Orders</a></div>
+	<div class="abcd"><a href="/loggedin/">Search Tasker</a></div>
+  	<div class="abcd" style="float:right"><a href="/logout/">logout</a></div>
+</div>
+	<section class="hero-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="hero-info">
+								<h2>{{myorders.order_id}}</h2>
+								<ul>
+									<li><span>Tasker : </span>{{myorders.t_id}}</li>
+									<li><span>Work : </span>{{myorders.t_type}}</li>
+									<li><span>Status : </span>{% ifequal 0 myorders.order_status %}PENDING{% else %} Delivered
+									{% endifequal %}</li>
+								</ul>
+								</div>
+							<br>
+							<br>
+						</div>
+						{% ifequal 1 myorders.order_status %}
+							{% ifequal 0.0 myorders.order_review %}
+							<form action="\submit_review\" method="POST">{% csrf_token %}
+							<input type="hidden" name = "orderid" value="{{myorders.order_id}}">
+							<input type="hidden" name = "taskerid" value="{{myorders.t_id}}">
+							<h3>Review: </h3>
+							<input type="radio" name="review" value=0.5> 0.5   		
+							<input type="radio" name="review" value=1.0> 1
+  							<input type="radio" name="review" value=1.5> 1.5
+  							<input type="radio" name="review" value=2.0> 2  		
+							<input type="radio" name="review" value=2.5> 2.5<br><br><br>
+  							<input type="radio" name="review" value=3.0> 3
+  							<input type="radio" name="review" value=3.5> 3.5   		
+							<input type="radio" name="review" value=4.0> 4
+							<input type="radio" name="review" value=4.5> 4.5
+							<input type="radio" name="review" value=5.0> 5<br><br>
+							<button>Submit Review</button>
+							</form>
+							{% endifequal %}
+						{% endifequal %}
+						{% ifequal 0.0 myorders.order_review %}
+						{% else %}
+						<h1><li><span>Review: </span>{{myorders.order_review}}</li>
+						{% endifequal %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<input type="hidden" name="customerinfo" value="{{cust.c_name}}">
+	<script src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+	<script src='{% static "main.js" %}'></script>
+	</body>
+</html>
